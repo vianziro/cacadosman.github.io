@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cacadosman</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="ui visible left demo vertical inverted sidebar labeled icon menu">
+        <a href="#" @click="currentView='home'" class="item">
+          <i class="home icon"></i>
+          Home
+        </a>
+        <a href="#" @click="currentView='skills'" class="item">
+          <i class="block layout icon"></i>
+          Skills
+        </a>
+        <a href="#" @click="aboutMe()" class="item">
+          <i class="smile icon"></i>
+          About me
+        </a>
+      </div>
+      <div class="ui grid">
+        <div class="content sixteen wide column">
+          <transition name="slide-fade">
+            <component :is="currentView" :props="obj"></component>
+          </transition>
+        </div>
+      </div>
+    </div>
+
+    <template id="home-template">
+      <div class="ui title center aligned text container">
+        <h1>Fadli Maulana M</h1>
+        <p>Standing on The Shoulders of Giants</p>
+      </div>
+    </template>
+
+    <template id="skills-template">
+      <div class="ui skill text">
+        <div class="ui stackable grid">
+          <div class="eight wide column">
+            <div class="ui stackable grid">
+              <div class="eight wide column">
+                <h1>Academics</h1>
+                <div class="ui bulleted list">
+                  <div class="item" v-for="academic in props.academics">{{academic}}</div>
+                </div>
+                <h1>Events</h1>
+                  <div class="ui bulleted list">
+                    <div class="item" v-for="event in props.events">{{event}}</div>
+                  </div>
+              </div>
+              <div class="eight wide column">
+                <h1>Organizations</h1>
+                <div class="ui list">
+                  <div class="item" v-for="organization in props.organizations">
+                    <i class="at icon"></i>
+                    <div class="content">
+                      <a class="header">{{organization.header}}</a>
+                      <div style="color:white" class="description" v-html="organization.description"></div>
+                    </div>
+                  </div>
+                </div>
+                <h1>Soft Skills</h1>
+                <p>Languages (English and Indonesia), Teamwork, Work hard & smart, Leadership,
+                Communication, Honest, Commit, Study hard, etc</p>
+              </div>
+            </div>
+            <div class="ui stackable grid">
+              <div class="quote sixteen wide column center aligned text">
+                <h1>No Code No Lyfe</h1>
+                <a href="https://github.com/cacadosman">https://github.com/cacadosman</a>
+              </div>
+            </div>
+          </div>
+          <div class="eight wide column" style="color:white">
+            <h1>Languages</h1>
+            <div v-for="language in props.languages">
+              <div v-bind:class="language.color" class="ui progress">
+                <div class="bar" v-bind:style="{width:language.progress}">
+                  <div class="progress">{{language.progress}}</div>
+                </div>
+                <div class="label" style="color:white">{{language.label}}</div>
+              </div>
+            </div>
+            <h1>Frameworks</h1>
+            <div class="ui list">
+              <div class="item" v-for="framework in props.frameworks">
+                <i class="terminal icon"></i>
+                <div class="content">
+                  {{framework}}
+                </div>
+              </div>
+            </div>
+            <h1>Other Skills</h1>
+            <p>Linux, Git & Github, Security, Photoshop</p>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="assets/js/scripts.js"></script>
+  </body>
+</html>
